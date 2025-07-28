@@ -1,12 +1,10 @@
 import { Clock, Users, Star, CheckCircle2, Play } from 'lucide-react';
-import { SiReact, SiNodedotjs, SiMongodb } from 'react-icons/si';
+import { SiReact, SiNodedotjs, SiMongodb, SiJavascript } from 'react-icons/si';
 import { Database } from 'lucide-react';
-import GlassCard from '@/components/ui/glass-card';
-import NeonButton from '@/components/ui/neon-button';
 import { useState } from 'react';
 
 export default function CoursesSection() {
-  const [selectedCategory, setSelectedCategory] = useState("Web Development");
+  const [selectedCategory, setSelectedCategory] = useState("Mobile Development");
   const [selectedHours, setSelectedHours] = useState("20hrs in a Month");
 
   const categories = [
@@ -29,73 +27,70 @@ export default function CoursesSection() {
       id: 1,
       title: "Full-Stack Web Development",
       subtitle: "MERN/MEAN/Java+React",
-      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-      icon: SiReact,
+      image: "/api/placeholder/400/250",
+      icon: "⚛️",
       category: "Development",
       duration: "12 Weeks",
       students: 120,
       rating: 4.5,
       classes: "12 Classes",
-      color: "from-orange-400/20 to-yellow-400/20",
-      features: ["React Hooks & Context", "Node.js & Express", "MongoDB Integration", "Authentication & Security"]
+      color: "#FED7AA",
+      bgColor: "bg-orange-100"
     },
     {
       id: 2,
       title: "Backend with Node.js and Express.js",
-      subtitle: "Server-side Development Mastery",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-      icon: SiNodedotjs,
-      category: "Backend",
+      subtitle: "Server-side Development",
+      image: "/api/placeholder/400/250",
+      icon: "📐",
+      category: "Backend",  
       duration: "10 Weeks",
       students: 120,
       rating: 4.5,
-      classes: "12 Classes",
-      color: "from-blue-400/20 to-cyan-400/20",
-      features: ["RESTful API Design", "Express Middleware", "Authentication Systems", "Database Integration"]
+      classes: "12 Classes", 
+      color: "#A7F3D0",
+      bgColor: "bg-emerald-100"
     },
     {
       id: 3,
       title: "Learn MongoDB with Mongoose",
-      subtitle: "Database Management & Operations",
-      image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-      icon: SiMongodb,
+      subtitle: "Database Management",
+      image: "/api/placeholder/400/250", 
+      icon: "🗃️",
       category: "Database",
       duration: "8 Weeks",
       students: 120,
       rating: 4.5,
       classes: "12 Classes",
-      color: "from-green-400/20 to-emerald-400/20",
-      features: ["MongoDB Fundamentals", "Mongoose ODM", "Data Modeling", "Aggregation Pipelines"]
+      color: "#BBF7D0", 
+      bgColor: "bg-green-100"
     },
     {
       id: 4,
       title: "Learn React with Redux toolkit",
-      subtitle: "Modern Frontend Development",
-      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
-      icon: SiReact,
+      subtitle: "Modern React Development", 
+      image: "/api/placeholder/400/250",
+      icon: "🔵",
       category: "Frontend",
-      duration: "10 Weeks",
+      duration: "10 Weeks", 
       students: 120,
       rating: 4.5,
       classes: "12 Classes",
-      color: "from-pink-400/20 to-rose-400/20",
-      features: ["Component Architecture", "Redux State Management", "Performance Optimization", "Testing Strategies"]
+      color: "#FECACA",
+      bgColor: "bg-red-100"
     }
   ];
 
   return (
-    <section id="courses" className="py-20 bg-gradient-to-b from-tech-secondary to-tech-dark relative">
+    <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
-        <div className="text-center mb-16 scroll-reveal">
-          <div className="inline-block px-4 py-2 glass-morphism rounded-full border border-tech-glow/30 mb-6">
-            <span className="text-tech-glow font-semibold text-sm tracking-wider">SKILL ENHANCEMENT</span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-black mb-6">
-            <span className="holographic-text">Advance your engineering</span><br/>
-            <span className="text-gradient">skills with our courses</span>
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            Advance your engineering<br/>
+            skills with our courses
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Build skills with our courses and mentor from world-class companies.
           </p>
 
@@ -111,14 +106,14 @@ export default function CoursesSection() {
               </div>
               <div className="ml-4">
                 <div className="flex items-center gap-1">
-                  <span className="text-2xl font-bold text-white">4.6</span>
+                  <span className="text-2xl font-bold text-gray-900">4.6</span>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
                 </div>
-                <p className="text-sm text-gray-400">Rated by 25k on google.</p>
+                <p className="text-sm text-gray-600">Rated by 25k on google.</p>
               </div>
             </div>
           </div>
@@ -127,14 +122,14 @@ export default function CoursesSection() {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
             {/* What do you want to learn */}
             <div className="text-left">
-              <label className="block text-lg font-semibold text-white mb-4">What do you want to learn?</label>
+              <label className="block text-lg font-semibold text-gray-900 mb-4">What do you want to learn?</label>
               <select 
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 glass-morphism border border-white/20 rounded-xl text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-tech-primary"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {categories.map(category => (
-                  <option key={category} value={category} className="bg-tech-dark text-white">
+                  <option key={category} value={category}>
                     {category}
                   </option>
                 ))}
@@ -143,14 +138,14 @@ export default function CoursesSection() {
 
             {/* Hours you going to invest */}
             <div className="text-left">
-              <label className="block text-lg font-semibold text-white mb-4">Hours you going to invest?</label>
+              <label className="block text-lg font-semibold text-gray-900 mb-4">Hours you going to invest?</label>
               <select 
                 value={selectedHours}
                 onChange={(e) => setSelectedHours(e.target.value)}
-                className="w-full px-4 py-3 glass-morphism border border-white/20 rounded-xl text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-tech-primary"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {hoursOptions.map(hours => (
-                  <option key={hours} value={hours} className="bg-tech-dark text-white">
+                  <option key={hours} value={hours}>
                     {hours}
                   </option>
                 ))}
@@ -159,20 +154,17 @@ export default function CoursesSection() {
           </div>
 
           <div className="flex justify-center mb-16">
-            <NeonButton className="animate-glow group px-12 py-4">
-              <span className="relative z-10 flex items-center gap-2 text-lg font-semibold">
-                <Play className="w-5 h-5" />
-                Start
-              </span>
-            </NeonButton>
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-12 py-4 rounded-lg text-lg transition-colors">
+              Start
+            </button>
           </div>
         </div>
 
         {/* Popular Courses Section */}
         <div className="mb-12">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-4xl font-bold text-white">Popular Courses</h3>
-            <button className="text-tech-primary hover:text-tech-accent transition-colors border border-tech-primary/30 px-6 py-2 rounded-full hover:bg-tech-primary/10">
+            <h3 className="text-4xl font-bold text-gray-900">Popular Courses</h3>
+            <button className="text-purple-600 hover:text-purple-700 transition-colors border border-purple-200 px-6 py-2 rounded-full hover:bg-purple-50">
               Explore Classes
             </button>
           </div>
@@ -185,8 +177,8 @@ export default function CoursesSection() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full transition-all ${
                   selectedCategory === category 
-                    ? 'bg-tech-primary text-white' 
-                    : 'text-gray-400 hover:text-white border border-gray-600 hover:border-tech-primary'
+                    ? 'bg-gray-900 text-white' 
+                    : 'text-gray-600 hover:text-gray-900 border border-gray-300 hover:border-gray-400'
                 }`}
               >
                 {category}
@@ -197,57 +189,36 @@ export default function CoursesSection() {
 
         {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {courses.map((course) => {
-            const IconComponent = course.icon;
-            return (
-              <GlassCard key={course.id} className="overflow-hidden neon-border hover:scale-[1.02] transition-transform duration-500 scroll-reveal">
-                <div className="relative">
-                  <img 
-                    src={course.image} 
-                    alt={course.title} 
-                    className="w-full h-40 object-cover" 
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${course.color}`}></div>
-                  <div className="absolute top-4 left-4">
-                    <IconComponent className="w-8 h-8 text-white" />
+          {courses.map((course) => (
+            <div key={course.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className={`relative h-40 ${course.bgColor} flex items-center justify-center`}>
+                <div className="text-6xl">{course.icon}</div>
+              </div>
+              
+              <div className="p-4 space-y-3">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">{course.title}</h3>
+                  <p className="text-sm text-gray-600">{course.subtitle}</p>
+                </div>
+
+                {/* Course Stats */}
+                <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-1">
+                    <Users className="w-4 h-4" />
+                    <span>{course.students}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span>{course.rating}</span>
                   </div>
                 </div>
-                
-                <div className="p-4 space-y-3">
-                  <div>
-                    <h3 className="text-lg font-bold text-white mb-1">{course.title}</h3>
-                    <p className="text-sm text-gray-400">{course.subtitle}</p>
-                  </div>
 
-                  {/* Course Stats */}
-                  <div className="flex items-center gap-4 text-sm text-gray-400">
-                    <div className="flex items-center gap-1">
-                      <Users className="w-4 h-4" />
-                      <span>{course.students}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>{course.rating}</span>
-                    </div>
-                  </div>
-
-                  <div className="text-sm text-gray-300">
-                    {course.classes}
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2">
-                    {course.features.slice(0, 2).map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm text-gray-300">
-                        <CheckCircle2 className="w-3 h-3 text-tech-accent" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="text-sm text-gray-700">
+                  {course.classes}
                 </div>
-              </GlassCard>
-            );
-          })}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

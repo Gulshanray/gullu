@@ -1,90 +1,53 @@
-import { Play, Rocket, TrendingUp, BarChart3 } from 'lucide-react';
-import NeonButton from '@/components/ui/neon-button';
-import GlassCard from '@/components/ui/glass-card';
+import { Play } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Modern abstract background with gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-tech-dark via-tech-secondary to-tech-dark">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-tech-primary/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-tech-accent/20 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-tech-glow/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-        <div className="space-y-8 animate-fade-in-up">
-          <div className="space-y-4">
-            <div className="inline-block px-6 py-2 glass-morphism rounded-full border border-tech-accent/30">
-              <span className="text-tech-accent font-semibold text-sm tracking-wider">NEXT-GEN TECHNOLOGY</span>
-            </div>
-            <h1 className="text-6xl md:text-8xl font-black leading-tight">
-              <span className="holographic-text">Revolutionary</span><br/>
-              <span className="text-white">Digital</span><br/>
-              <span className="text-gradient animate-gradient-shift">Solutions</span>
-            </h1>
-          </div>
-          <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
-            Transform your business with cutting-edge technology and innovative design solutions that drive exponential growth and success.
+    <section id="home" className="min-h-screen pt-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="text-center">
+          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
+            Advance your engineering<br/>
+            skills with our courses
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+            Build skills with our courses and mentor from world-class companies.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <NeonButton className="animate-glow group">
-              <span className="relative z-10 flex items-center gap-2">
-                Get Started Today
-                <Rocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </NeonButton>
-            <button className="glass-morphism text-white px-8 py-4 rounded-2xl font-semibold hover:scale-105 transition-all duration-300 flex items-center gap-2 neon-border">
-              <Play className="w-5 h-5" />
-              Watch Demo
-            </button>
-          </div>
-          
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-tech-accent mb-1">500+</div>
-              <div className="text-sm text-gray-400">Projects Delivered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-tech-glow mb-1">98%</div>
-              <div className="text-sm text-gray-400">Client Satisfaction</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-tech-primary mb-1">24/7</div>
-              <div className="text-sm text-gray-400">Support Available</div>
+
+          {/* Rating Display */}
+          <div className="flex items-center justify-center gap-4 mb-16">
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 border-2 border-white"></div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 border-2 border-white"></div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 border-2 border-white"></div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-red-500 border-2 border-white"></div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 border-2 border-white"></div>
+              </div>
+              <div className="ml-6">
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold text-gray-900">4.6</span>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600">Rated by 25k on google.</p>
+              </div>
             </div>
           </div>
         </div>
         
-        <div className="relative animate-slide-in-left">
-          {/* Futuristic 3D representation with floating cards */}
-          <div className="relative w-full h-[500px] flex items-center justify-center">
-            {/* Main floating card */}
-            <GlassCard className="absolute w-80 h-60 p-6 animate-float neon-border">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 bg-gradient-to-r from-tech-primary to-tech-accent rounded-xl"></div>
-                  <span className="text-tech-accent font-bold">Live Dashboard</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="h-2 bg-gradient-to-r from-tech-primary/50 to-tech-accent/50 rounded-full"></div>
-                  <div className="h-2 bg-gradient-to-r from-tech-accent/50 to-tech-glow/50 rounded-full w-3/4"></div>
-                  <div className="h-2 bg-gradient-to-r from-tech-glow/50 to-tech-primary/50 rounded-full w-1/2"></div>
-                </div>
-              </div>
-            </GlassCard>
-            
-            {/* Smaller floating elements */}
-            <GlassCard className="absolute top-0 right-0 w-24 h-24 animate-float flex items-center justify-center" style={{animationDelay: '0.5s'}}>
-              <Rocket className="text-tech-accent text-2xl" />
-            </GlassCard>
-            <GlassCard className="absolute bottom-0 left-0 w-32 h-16 animate-float flex items-center justify-center" style={{animationDelay: '1s'}}>
-              <span className="text-tech-glow font-bold">+247%</span>
-            </GlassCard>
-            <GlassCard className="absolute top-1/2 right-16 w-20 h-20 rounded-full animate-float flex items-center justify-center" style={{animationDelay: '1.5s'}}>
-              <BarChart3 className="text-tech-primary text-xl" />
-            </GlassCard>
+        {/* Trusted Companies Section */}
+        <div className="text-center mb-12">
+          <p className="text-gray-500 mb-8 text-lg">Trusted by companies of all sizes</p>
+          <div className="flex flex-wrap justify-center items-center gap-16 opacity-60">
+            <div className="text-3xl font-bold text-blue-600">Walmart</div>
+            <div className="text-3xl font-bold text-purple-600">FedEx</div>
+            <div className="text-3xl font-bold text-red-500">Airbnb</div>
+            <div className="text-3xl font-bold text-orange-500">HubSpot</div>
           </div>
         </div>
       </div>

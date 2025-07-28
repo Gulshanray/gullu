@@ -6,8 +6,6 @@ import { z } from 'zod';
 import { Star, User } from 'lucide-react';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import GlassCard from '@/components/ui/glass-card';
-import NeonButton from '@/components/ui/neon-button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -51,59 +49,59 @@ export default function ReviewsSection() {
       queryClient.invalidateQueries({ queryKey: ['/api/reviews'] });
       form.reset();
       setSelectedRating(5);
+      setShowReviewForm(false);
       toast({
         title: "Success!",
         description: "Thank you for your review! It has been added to our testimonials.",
       });
     },
-    onError: () => {
+    onError: (error) => {
       toast({
         title: "Error",
         description: "Failed to submit review. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
-    },
+    }
   });
 
   const onSubmit = (data: ReviewFormData) => {
-    createReviewMutation.mutate({ ...data, rating: selectedRating });
+    createReviewMutation.mutate({
+      ...data,
+      rating: selectedRating
+    });
   };
 
-  const renderStars = (rating: number, interactive = false, onStarClick?: (rating: number) => void) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <Star
-        key={index}
-        className={`w-5 h-5 ${
-          index < rating 
-            ? 'text-yellow-400 fill-current' 
-            : 'text-gray-400'
-        } ${interactive ? 'cursor-pointer hover:text-yellow-400 transition-colors' : ''}`}
-        onClick={() => interactive && onStarClick?.(index + 1)}
-      />
-    ));
-  };
+  if (isLoading) {
+    return (
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading reviews...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section id="reviews" className="py-20 bg-gradient-to-b from-tech-dark to-tech-secondary relative">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16 scroll-reveal">
+        <div className="mb-16">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <div className="inline-block px-4 py-2 glass-morphism rounded-full border border-tech-accent/30 mb-4">
-                <span className="text-tech-accent font-semibold text-sm tracking-wider">TESTIMONIALS</span>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-black mb-4">
-                <span className="holographic-text">What Our Happy</span><br/>
-                <span className="text-gradient">Students Says</span>
+              <h2 className="text-5xl font-bold text-gray-900 mb-4">
+                What Our Happy<br/>
+                Students Says
               </h2>
-              <p className="text-xl text-gray-300 max-w-2xl">
+              <p className="text-xl text-gray-600 max-w-2xl">
                 Build skills with our courses and mentor from world-class companies.
               </p>
             </div>
             <div className="hidden md:block">
               <button 
                 onClick={() => setShowReviewForm(true)}
-                className="px-6 py-3 border border-tech-primary/50 text-tech-primary hover:bg-tech-primary hover:text-white transition-all duration-300 rounded-xl font-semibold"
+                className="px-6 py-3 border border-purple-200 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 rounded-lg font-semibold"
               >
                 Give Your Review
               </button>
@@ -114,7 +112,7 @@ export default function ReviewsSection() {
           <div className="md:hidden text-center mb-8">
             <button 
               onClick={() => setShowReviewForm(true)}
-              className="px-6 py-3 border border-tech-primary/50 text-tech-primary hover:bg-tech-primary hover:text-white transition-all duration-300 rounded-xl font-semibold"
+              className="px-6 py-3 border border-purple-200 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 rounded-lg font-semibold"
             >
               Give Your Review
             </button>
@@ -123,124 +121,130 @@ export default function ReviewsSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Reviews Display */}
-          <div className="space-y-6">
-            {isLoading ? (
-              <div className="space-y-6">
-                {[1, 2, 3].map((i) => (
-                  <GlassCard key={i} className="p-6 neon-border animate-pulse">
-                    <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 bg-gray-600 rounded-full"></div>
-                      <div className="flex-1 space-y-2">
-                        <div className="h-4 bg-gray-600 rounded w-1/3"></div>
-                        <div className="h-3 bg-gray-600 rounded w-full"></div>
-                        <div className="h-3 bg-gray-600 rounded w-2/3"></div>
-                      </div>
-                    </div>
-                  </GlassCard>
-                ))}
-              </div>
-            ) : (
-              reviews.map((review) => (
-                <GlassCard key={review.id} className="p-6 neon-border scroll-reveal">
-                  <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-tech-primary to-tech-accent rounded-full flex items-center justify-center">
-                      <User className="text-white text-xl" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-bold text-white">{review.name}</h4>
-                        <div className="flex">
-                          {renderStars(review.rating)}
-                        </div>
-                      </div>
-                      <p className="text-gray-300 leading-relaxed mb-2">
-                        "{review.text}"
-                      </p>
-                      <span className="text-tech-accent text-sm">{review.position}</span>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {reviews.map((review) => (
+              <div key={review.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center">
+                    <User className="w-6 h-6 text-white" />
                   </div>
-                </GlassCard>
-              ))
-            )}
-          </div>
-
-          {/* Review Submission Form */}
-          <GlassCard className="p-8 neon-border scroll-reveal">
-            <h3 className="text-3xl font-bold text-white mb-6">Share Your Experience</h3>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Your Name</FormLabel>
-                      <FormControl>
-                        <Input 
-                          {...field} 
-                          className="bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-tech-accent"
-                          placeholder="Enter your name"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="position"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Company/Position</FormLabel>
-                      <FormControl>
-                        <Input 
-                          {...field} 
-                          className="bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-tech-accent"
-                          placeholder="e.g., CEO at TechCorp"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Rating</label>
-                  <div className="flex gap-2">
-                    {renderStars(selectedRating, true, setSelectedRating)}
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{review.name}</h4>
+                    <p className="text-sm text-gray-600">{review.position}</p>
                   </div>
                 </div>
-                
-                <FormField
-                  control={form.control}
-                  name="text"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Your Review</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          {...field} 
-                          rows={4}
-                          className="bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-tech-accent"
-                          placeholder="Share your experience with TechSol..."
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <NeonButton 
-                  type="submit" 
-                  className="w-full animate-glow"
-                  disabled={createReviewMutation.isPending}
+                <div className="flex mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-4 h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                    />
+                  ))}
+                </div>
+                <p className="text-gray-700 text-sm leading-relaxed">{review.text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Review Form */}
+          {showReviewForm && (
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">Share Your Experience</h3>
+                <button 
+                  onClick={() => setShowReviewForm(false)}
+                  className="text-gray-500 hover:text-gray-700 text-xl"
                 >
-                  {createReviewMutation.isPending ? 'Submitting...' : 'Submit Review'}
-                </NeonButton>
-              </form>
-            </Form>
-          </GlassCard>
+                  ×
+                </button>
+              </div>
+              
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Your Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Enter your name" 
+                            {...field} 
+                            className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="position"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Position/Company</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="e.g., Full-Stack Web Developer" 
+                            {...field} 
+                            className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-900 mb-2">Rating</label>
+                    <div className="flex gap-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setSelectedRating(star)}
+                          className="focus:outline-none"
+                        >
+                          <Star 
+                            className={`w-6 h-6 ${star <= selectedRating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="text"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-900">Your Review</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Share your experience with our courses..." 
+                            rows={4} 
+                            {...field}
+                            className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={createReviewMutation.isPending}
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {createReviewMutation.isPending ? 'Submitting...' : 'Submit Review'}
+                  </button>
+                </form>
+              </Form>
+            </div>
+          )}
         </div>
       </div>
     </section>
