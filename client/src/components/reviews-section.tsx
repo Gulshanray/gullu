@@ -24,6 +24,7 @@ type ReviewFormData = z.infer<typeof reviewSchema>;
 
 export default function ReviewsSection() {
   const [selectedRating, setSelectedRating] = useState(5);
+  const [showReviewForm, setShowReviewForm] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -85,16 +86,39 @@ export default function ReviewsSection() {
   return (
     <section id="reviews" className="py-20 bg-gradient-to-b from-tech-dark to-tech-secondary relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16 scroll-reveal">
-          <div className="inline-block px-4 py-2 glass-morphism rounded-full border border-tech-accent/30 mb-6">
-            <span className="text-tech-accent font-semibold text-sm tracking-wider">TESTIMONIALS</span>
+        <div className="mb-16 scroll-reveal">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <div className="inline-block px-4 py-2 glass-morphism rounded-full border border-tech-accent/30 mb-4">
+                <span className="text-tech-accent font-semibold text-sm tracking-wider">TESTIMONIALS</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-black mb-4">
+                <span className="holographic-text">What Our Happy</span><br/>
+                <span className="text-gradient">Students Says</span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl">
+                Build skills with our courses and mentor from world-class companies.
+              </p>
+            </div>
+            <div className="hidden md:block">
+              <button 
+                onClick={() => setShowReviewForm(true)}
+                className="px-6 py-3 border border-tech-primary/50 text-tech-primary hover:bg-tech-primary hover:text-white transition-all duration-300 rounded-xl font-semibold"
+              >
+                Give Your Review
+              </button>
+            </div>
           </div>
-          <h2 className="text-5xl md:text-6xl font-black mb-6">
-            <span className="holographic-text">Client Success Stories</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            See what our clients say about their transformative experiences with TechSol's innovative solutions
-          </p>
+          
+          {/* Mobile "Give Your Review" button */}
+          <div className="md:hidden text-center mb-8">
+            <button 
+              onClick={() => setShowReviewForm(true)}
+              className="px-6 py-3 border border-tech-primary/50 text-tech-primary hover:bg-tech-primary hover:text-white transition-all duration-300 rounded-xl font-semibold"
+            >
+              Give Your Review
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
