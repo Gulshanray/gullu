@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'wouter';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+  const [location] = useLocation();
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
@@ -24,42 +18,36 @@ export default function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+            <Link 
+              href="/"
+              className={`transition-colors duration-300 font-medium ${location === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
             >
               Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('services')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+            </Link>
+            <Link 
+              href="/services"
+              className={`transition-colors duration-300 font-medium ${location === '/services' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+            >
+              Services
+            </Link>
+            <Link 
+              href="/courses"
+              className={`transition-colors duration-300 font-medium ${location === '/courses' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
             >
               Courses
-            </button>
-            <button 
-              onClick={() => scrollToSection('courses')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+            </Link>
+            <Link 
+              href="/reviews"
+              className={`transition-colors duration-300 font-medium ${location === '/reviews' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
             >
-              Mentors
-            </button>
-            <button 
-              onClick={() => scrollToSection('reviews')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-            >
-              Testimonial
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-            >
-              Join
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+              Reviews
+            </Link>
+            <Link 
+              href="/contact"
+              className={`transition-colors duration-300 font-medium ${location === '/contact' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
             >
               Contact Us
-            </button>
+            </Link>
           </div>
           
 
@@ -76,42 +64,41 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4 pt-4">
-              <button 
-                onClick={() => scrollToSection('home')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
+              <Link 
+                href="/" 
+                onClick={() => setIsMenuOpen(false)}
+                className={`text-left transition-colors duration-300 ${location === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
               >
                 Home
-              </button>
-              <button 
-                onClick={() => scrollToSection('services')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
+              </Link>
+              <Link 
+                href="/services" 
+                onClick={() => setIsMenuOpen(false)}
+                className={`text-left transition-colors duration-300 ${location === '/services' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+              >
+                Services
+              </Link>
+              <Link 
+                href="/courses" 
+                onClick={() => setIsMenuOpen(false)}
+                className={`text-left transition-colors duration-300 ${location === '/courses' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
               >
                 Courses
-              </button>
-              <button 
-                onClick={() => scrollToSection('courses')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
+              </Link>
+              <Link 
+                href="/reviews" 
+                onClick={() => setIsMenuOpen(false)}
+                className={`text-left transition-colors duration-300 ${location === '/reviews' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
               >
-                Mentors
-              </button>
-              <button 
-                onClick={() => scrollToSection('reviews')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
-              >
-                Testimonial
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
-              >
-                Join
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-left text-gray-700 hover:text-blue-600 transition-colors duration-300"
+                Reviews
+              </Link>
+              <Link 
+                href="/contact" 
+                onClick={() => setIsMenuOpen(false)}
+                className={`text-left transition-colors duration-300 ${location === '/contact' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
               >
                 Contact Us
-              </button>
+              </Link>
             </div>
           </div>
         )}

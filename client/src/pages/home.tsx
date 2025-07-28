@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Navigation from '@/components/navigation';
 import HeroSection from '@/components/hero-section';
 import ServicesSection from '@/components/services-section';
 import CoursesSection from '@/components/courses-section';
@@ -31,7 +30,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
-      <Navigation />
       <HeroSection />
       <ServicesSection />
       <CoursesSection />
