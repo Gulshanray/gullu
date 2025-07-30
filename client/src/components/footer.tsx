@@ -10,118 +10,100 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-t from-tech-dark to-tech-secondary py-16 border-t border-white/10 relative overflow-hidden">
-      {/* Modern background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-20 w-32 h-32 bg-tech-primary/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-10 right-20 w-40 h-40 bg-tech-accent/10 rounded-full blur-2xl"></div>
+    <footer className="relative py-16 bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e] border-t border-white/10 overflow-hidden">
+      {/* Glowing circles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-16 w-40 h-40 bg-tech-primary/20 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-0 right-24 w-56 h-56 bg-tech-accent/20 rounded-full blur-[160px]"></div>
       </div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Brand Info */}
           <div className="space-y-6 md:col-span-2">
-            <div className="flex items-center space-x-2">
-              <div className="w-12 h-12 bg-gradient-to-r from-tech-primary to-tech-accent rounded-xl flex items-center justify-center animate-glow">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-tech-primary to-tech-accent rounded-xl flex items-center justify-center animate-pulse shadow-lg shadow-tech-accent/20">
                 <Code className="text-white text-xl" />
               </div>
-              <span className="text-3xl font-black text-gradient">TechSol</span>
+              <span className="text-3xl font-extrabold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                TechSol
+              </span>
             </div>
-            <p className="text-gray-300 leading-relaxed text-lg max-w-md">
-              Transforming businesses with revolutionary digital solutions. Experience the future of technology today.
+            <p className="text-gray-300 text-lg max-w-md leading-relaxed">
+              Transforming businesses with revolutionary digital solutions.
+              <br />
+              Experience the future of technology today.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="#" 
-                className="w-12 h-12 glass-morphism rounded-xl flex items-center justify-center hover:bg-tech-accent transition-all duration-300 hover:scale-110 neon-border"
-                aria-label="X (Twitter)"
-              >
-                <SiX className="text-white text-lg" />
-              </a>
-              <a 
-                href="#" 
-                className="w-12 h-12 glass-morphism rounded-xl flex items-center justify-center hover:bg-tech-accent transition-all duration-300 hover:scale-110 neon-border"
-                aria-label="LinkedIn"
-              >
-                <SiLinkedin className="text-white text-lg" />
-              </a>
-              <a 
-                href="#" 
-                className="w-12 h-12 glass-morphism rounded-xl flex items-center justify-center hover:bg-tech-accent transition-all duration-300 hover:scale-110 neon-border"
-                aria-label="GitHub"
-              >
-                <SiGithub className="text-white text-lg" />
-              </a>
-              <a 
-                href="#" 
-                className="w-12 h-12 glass-morphism rounded-xl flex items-center justify-center hover:bg-tech-accent transition-all duration-300 hover:scale-110 neon-border"
-                aria-label="Instagram"
-              >
-                <SiInstagram className="text-white text-lg" />
-              </a>
+              {[SiX, SiLinkedin, SiGithub, SiInstagram].map((Icon, idx) => (
+                <a
+                  key={idx}
+                  href="#"
+                  className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-tech-accent hover:scale-110 transform transition-all duration-300 border border-white/10"
+                >
+                  <Icon className="text-white text-lg" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Quick Navigation */}
+          {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-4 text-lg">Quick Links</h4>
             <ul className="space-y-3 text-gray-400">
-              <li>
-                <button 
-                  onClick={() => scrollToSection('services')}
-                  className="hover:text-tech-accent transition-colors duration-300 text-left"
-                >
-                  Our Services
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('courses')}
-                  className="hover:text-tech-accent transition-colors duration-300 text-left"
-                >
-                  Training Courses
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('reviews')}
-                  className="hover:text-tech-accent transition-colors duration-300 text-left"
-                >
-                  Client Reviews
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="hover:text-tech-accent transition-colors duration-300 text-left"
-                >
-                  Contact Us
-                </button>
-              </li>
+              {['services', 'courses', 'reviews', 'contact'].map((id, i) => (
+                <li key={i}>
+                  <button
+                    onClick={() => scrollToSection(id)}
+                    className="hover:text-tech-accent transition-colors duration-200 text-left"
+                  >
+                    {id === 'services' && 'Our Services'}
+                    {id === 'courses' && 'Training Courses'}
+                    {id === 'reviews' && 'Client Reviews'}
+                    {id === 'contact' && 'Contact Us'}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
+            <h4 className="text-white font-semibold mb-4 text-lg">Services</h4>
             <ul className="space-y-3 text-gray-400">
-              <li><span className="hover:text-tech-accent transition-colors cursor-pointer">Web Development</span></li>
-              <li><span className="hover:text-tech-accent transition-colors cursor-pointer">Mobile Apps</span></li>
-              <li><span className="hover:text-tech-accent transition-colors cursor-pointer">AI Solutions</span></li>
-              <li><span className="hover:text-tech-accent transition-colors cursor-pointer">Cloud Computing</span></li>
-              <li><span className="hover:text-tech-accent transition-colors cursor-pointer">Digital Marketing</span></li>
+              {[
+                'Web Development',
+                'Mobile Apps',
+                'AI Solutions',
+                'Cloud Computing',
+                'Digital Marketing',
+              ].map((service, index) => (
+                <li
+                  key={index}
+                  className="hover:text-tech-accent transition-colors cursor-pointer"
+                >
+                  {service}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 mb-4 md:mb-0">
-            © 2025 TechSol. All rights reserved. Built with passion for innovation.
+        {/* Bottom Bar */}
+        <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm">
+          <p className="mb-4 md:mb-0">
+            © 2025 <span className="text-white font-semibold">TechSol</span>. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-tech-accent transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-tech-accent transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-tech-accent transition-colors">Support</a>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-tech-accent transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-tech-accent transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-tech-accent transition-colors">
+              Support
+            </a>
           </div>
         </div>
       </div>

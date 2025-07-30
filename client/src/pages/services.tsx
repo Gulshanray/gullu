@@ -1,4 +1,5 @@
 import { Code, Smartphone, Database, Cloud, Shield, Zap, Users, Trophy, Target } from 'lucide-react';
+import { Link } from 'wouter';
 
 export default function ServicesPage() {
   const services = [
@@ -66,7 +67,7 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-gray-50 py-16 pt-40 pb-16">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -124,9 +125,11 @@ export default function ServicesPage() {
                 </div>
                 
                 {/* CTA Button */}
-                <button className={`w-full bg-gradient-to-r ${service.color} text-white font-semibold py-3 px-4 rounded-lg hover:shadow-lg transition-all duration-300 group-hover:scale-105`}>
-                  Learn More
-                </button>
+                <Link href='/contact'>
+                  <button className={`w-full bg-gradient-to-r ${service.color} text-white font-semibold py-3 px-4 rounded-lg hover:shadow-lg transition-all duration-300 group-hover:scale-105`}>
+                    Learn More
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
